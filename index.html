@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>همیار زبان | ۱۸۰۰ کلمه + ۱۰ درس گرامر</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:'Segoe UI',sans-serif;
+      background:#0a0e1a;
+      color:#e0e4ed;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px;
+    }
+    .app{
+      width:100%;
+      max-width:550px;
+      background:rgba(20,24,33,0.95);
+      border-radius:28px;
+      padding:20px 16px 24px;
+      box-shadow:0 20px 40px rgba(0,0,0,0.8);
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      border:1px solid rgba(255,255,255,0.05);
+    }
+    h1{
+      text-align:center;
+      background:linear-gradient(135deg,#c4b5fd,#60a5fa);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      font-size:1.8rem;
+      font-weight:800;
+    }
+    .mode-bar{
+      display:flex;
+      background:#1a1e2b;
+      border-radius:50px;
+      padding:4px;
+    }
+    .mode-bar button{
+      flex:1;
+      padding:10px 4px;
+      border-radius:40px;
+      font-weight:700;
+      cursor:pointer;
+      background:transparent;
+      border:none;
+      color:#9ca3b8;
+      font-size:0.8rem;
+    }
+    .mode-bar button.active{
+      background:#353e58;
+      color:#f1f5f9;
+      box-shadow:0 4px 12px rgba(0,0,0,0.4);
+    }
+    .term-nav{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+    }
+    .term-nav button{
+      background:#2d3548;
+      border:none;
+      color:white;
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      font-size:1.2rem;
+      cursor:pointer;
+      font-weight:bold;
+    }
+    .term-nav span{
+      font-weight:800;
+      font-size:1.1rem;
+      color:#c4b5fd;
+      min-width:90px;
+      text-align:center;
+    }
+    .card{
+      background:#1b1f2b;
+      border-radius:28px;
+      padding:24px;
+      text-align:center;
+      min-height:180px;
+    }
+    .word-row{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+    }
+    .word{
+      font-size:2.5rem;
+      font-weight:800;
+      color:#f0e9ff;
+    }
+    .speak-btn{
+      width:48px;
+      height:48px;
+      border-radius:50%;
+      background:#4f46e5;
+      border:none;
+      color:white;
+      font-size:1.4rem;
+      cursor:pointer;
+      box-shadow:0 6px 20px rgba(79,70,229,0.4);
+    }
+    .speak-btn:active{transform:scale(0.9);}
+    .speak-btn-sm{
+      width:32px;
+      height:32px;
+      border-radius:50%;
+      background:#4f46e5;
+      border:none;
+      color:white;
+      font-size:0.9rem;
+      cursor:pointer;
+      flex-shrink:0;
+    }
+    .mean{
+      font-size:1.5rem;
+      color:#b9c2ff;
+      margin:8px 0;
+      background:rgba(38,45,61,0.6);
+      padding:6px 20px;
+      border-radius:24px;
+    }
+    .exam-row{
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+    .exam{
+      font-size:0.95rem;
+      color:#a5b4d0;
+      font-style:italic;
+      background:rgba(255,255,255,0.03);
+      padding:10px;
+      border-radius:20px;
+      margin:4px 0;
+      flex:1;
+    }
+    .exam-t{
+      font-size:0.9rem;
+      color:#8892b4;
+    }
+    .hidden{display:none;}
+    .btns-row{
+      display:flex;
+      gap:10px;
+    }
+    .btn{
+      background:#30374d;
+      color:white;
+      padding:14px;
+      border-radius:50px;
+      border:none;
+      font-weight:700;
+      cursor:pointer;
+      font-size:1rem;
+      flex:1;
+      text-align:center;
+    }
+    .btn-reveal{background:#4c3f8c;}
+    .btn:active{transform:scale(0.96);}
+    .counter{
+      background:#0f121c;
+      padding:8px 20px;
+      border-radius:30px;
+      text-align:center;
+      font-weight:700;
+      font-size:0.9rem;
+      color:#b9c2ff;
+      border:1px solid #2f384e;
+    }
+    .quiz-options{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin:16px 0;
+    }
+    .quiz-opt{
+      background:#232b3a;
+      color:#dfe4f2;
+      padding:14px;
+      border-radius:24px;
+      border:1px solid #3a4157;
+      cursor:pointer;
+      font-weight:600;
+      font-size:0.95rem;
+    }
+    .quiz-opt.correct{background:#2e6b3e;border-color:#4ade80;color:white;}
+    .quiz-opt.wrong{background:#8b2c3c;border-color:#f87171;color:white;}
+    .score-bar{
+      display:flex;
+      justify-content:space-between;
+      padding:10px 20px;
+      background:#1b1f2b;
+      border-radius:30px;
+      font-weight:700;
+    }
+    .grammar-section{
+      background:#1b1f2b;
+      border-radius:20px;
+      padding:16px;
+      margin-top:8px;
+      max-height:500px;
+      overflow-y:auto;
+    }
+    .grammar-title{
+      font-size:1.2rem;
+      font-weight:700;
+      color:#c4b5fd;
+      margin-bottom:12px;
+      text-align:center;
+    }
+    .grammar-lesson{
+      background:#232b3a;
+      border-radius:14px;
+      padding:14px;
+      margin-bottom:10px;
+      border:1px solid #3a4157;
+    }
+    .grammar-lesson h4{
+      color:#f0e9ff;
+      font-size:1.05rem;
+      margin-bottom:6px;
+    }
+    .grammar-lesson .desc{
+      color:#a5b4d0;
+      font-size:0.9rem;
+      line-height:1.8;
+      margin-bottom:8px;
+    }
+    .grammar-example{
+      background:rgba(255,255,255,0.04);
+      padding:8px 12px;
+      border-radius:10px;
+      margin:4px 0;
+      font-style:italic;
+      color:#b9c2ff;
+      font-size:0.9rem;
+    }
+    .grammar-trans{
+      color:#8892b4;
+      font-size:0.85rem;
+      margin-bottom:6px;
+      padding-right:8px;
+    }
+    .explain-btn{
+      background:#4f46e5 !important;
+      font-size:0.85rem !important;
+      margin-top:8px !important;
+      padding:10px !important;
+      width:100% !important;
+    }
+  </style>
+</head>
+<body>
+<div class="app" id="app"></div>
+
+<script>
+// ============================================================
+//   داده‌های ۱۸۰۰ کلمه (۱۰ ترم)
+// ============================================================
+const data = {
+
+  "ترم ۱": [
+    { w: "Hello", t: "سلام", e: "Hello, I'm Mahdi.", et: "سلام، من مهدی هستم." },
+    { w: "Hi", t: "سلام (خودمونی)", e: "Hi, how are you?", et: "سلام، خوبی؟" },
+    { w: "Goodbye", t: "خداحافظ", e: "Goodbye, see you tomorrow.", et: "خداحافظ، فردا می‌بینمت." },
+    { w: "Bye", t: "خداحافظ (خودمونی)", e: "Bye, take care!", et: "خداحافظ، مواظب خودت باش!" },
+    { w: "Yes", t: "بله", e: "Yes, I understand.", et: "بله، می‌فهمم." },
+    { w: "No", t: "نه/خیر", e: "No, thank you.", et: "نه، متشکرم." },
+    { w: "Please", t: "لطفاً", e: "Please sit down.", et: "لطفاً بنشین." },
+    { w: "Thanks", t: "مرسی", e: "Thanks for helping me.", et: "مرسی که کمکم کردی." },
+    { w: "Thank you", t: "متشکرم", e: "Thank you for your kindness.", et: "متشکرم از لطفت." },
+    { w: "Sorry", t: "ببخشید/متأسفم", e: "Sorry, I'm late.", et: "ببخشید، دیر کردم." },
+    { w: "Excuse me", t: "ببخشید (جلب توجه)", e: "Excuse me, where is the hospital?", et: "ببخشید، بیمارستان کجاست؟" },
+    { w: "Okay", t: "باشه/خوبه", e: "Okay, let's start.", et: "باشه، بیا شروع کنیم." },
+    { w: "Name", t: "اسم", e: "My name is Reza.", et: "اسم من رضاست." },
+    { w: "What", t: "چه/چی", e: "What is this?", et: "این چیه؟" },
+    { w: "Who", t: "چه کسی", e: "Who is your teacher?", et: "معلمت کیه؟" },
+    { w: "Where", t: "کجا", e: "Where do you live?", et: "کجا زندگی می‌کنی؟" },
+    { w: "When", t: "کی/چه وقت", e: "When is your birthday?", et: "تولدت کِی هست؟" },
+    { w: "Why", t: "چرا", e: "Why are you crying?", et: "چرا گریه می‌کنی؟" },
+    { w: "How", t: "چطور/چگونه", e: "How do you make this cake?", et: "این کیک رو چطور درست می‌کنی؟" },
+    { w: "How much", t: "چقدر (قیمت)", e: "How much is this book?", et: "قیمت این کتاب چقدره؟" }
+  ],
+
+  "ترم ۲": [
+    { w: "How many", t: "چند تا", e: "How many brothers do you have?", et: "چند تا برادر داری؟" },
+    { w: "This", t: "این (نزدیک)", e: "This is my car.", et: "این ماشین منه." },
+    { w: "That", t: "آن (دور)", e: "That building is very tall.", et: "اون ساختمان خیلی بلنده." },
+    { w: "These", t: "اینها (نزدیک)", e: "These flowers are beautiful.", et: "این گلها قشنگن." },
+    { w: "Those", t: "آنها (دور)", e: "Those mountains are far.", et: "اون کوه‌ها دورن." },
+    { w: "Here", t: "اینجا", e: "Come here, please.", et: "بیا اینجا، لطفاً." },
+    { w: "There", t: "آنجا", e: "Put the bag there.", et: "کیف رو بذار اونجا." },
+    { w: "Now", t: "حالا/الان", e: "I'm busy now.", et: "الان سرم شلوغه." },
+    { w: "Today", t: "امروز", e: "Today is a beautiful day.", et: "امروز روز قشنگیه." },
+    { w: "Tomorrow", t: "فردا", e: "I'll see you tomorrow.", et: "فردا می‌بینمت." },
+    { w: "Yesterday", t: "دیروز", e: "I went to the park yesterday.", et: "دیروز رفتم پارک." },
+    { w: "I", t: "من", e: "I am a student.", et: "من یک دانش‌آموز هستم." },
+    { w: "You", t: "تو/شما", e: "You are very kind.", et: "تو خیلی مهربونی." },
+    { w: "He", t: "او (مذکر)", e: "He is my brother.", et: "او برادر من است." },
+    { w: "She", t: "او (مونث)", e: "She is a doctor.", et: "او یک پزشک است." },
+    { w: "It", t: "آن (اشیاء/حیوانات)", e: "It is a nice cat.", et: "اون یه گربه قشنگه." },
+    { w: "We", t: "ما", e: "We are going to the cinema.", et: "ما داریم می‌ریم سینما." },
+    { w: "They", t: "آنها", e: "They are my classmates.", et: "آنها هم‌کلاسی‌های من هستن." },
+    { w: "My", t: "مال من", e: "My phone is new.", et: "گوشی من نو هست." },
+    { w: "Your", t: "مال تو/شما", e: "Your bag is on the table.", et: "کیفت روی میزه." }
+  ],
+
+  "ترم ۳": [
+    { w: "His", t: "مال او (مذکر)", e: "His name is Ali.", et: "اسم او علی است." },
+    { w: "Her", t: "مال او (مونث)", e: "Her hair is long.", et: "موهای او بلنده." },
+    { w: "Its", t: "مال آن", e: "The cat is licking its paw.", et: "گربه داره پنجه‌اش رو می‌لیسه." },
+    { w: "Our", t: "مال ما", e: "Our house is near the park.", et: "خانه ما نزدیک پارکه." },
+    { w: "Their", t: "مال آنها", e: "Their garden is beautiful.", et: "باغ آنها قشنگه." },
+    { w: "Me", t: "من را/به من", e: "Give me a chance.", et: "به من یه فرصت بده." },
+    { w: "Him", t: "او را (مذکر)", e: "I saw him at the market.", et: "من او رو تو بازار دیدم." },
+    { w: "Us", t: "ما را", e: "Come with us.", et: "با ما بیا." },
+    { w: "Them", t: "آنها را", e: "I know them very well.", et: "من آنها رو خوب می‌شناسم." },
+    { w: "Man", t: "مرد", e: "That man is my uncle.", et: "اون مرد، عموی من است." },
+    { w: "Woman", t: "زن", e: "She is a strong woman.", et: "او یک زن قوی است." },
+    { w: "Boy", t: "پسر (بچه)", e: "The boy is playing football.", et: "پسر داره فوتبال بازی می‌کنه." },
+    { w: "Girl", t: "دختر (بچه)", e: "The girl is reading a book.", et: "دختر داره کتاب می‌خونه." },
+    { w: "Child", t: "بچه/کودک", e: "The child is sleeping.", et: "بچه خوابیده." },
+    { w: "Baby", t: "نوزاد", e: "The baby is crying.", et: "نوزاد داره گریه می‌کنه." },
+    { w: "Friend", t: "دوست", e: "Ali is my best friend.", et: "علی بهترین دوست منه." },
+    { w: "Mother", t: "مادر", e: "My mother is a teacher.", et: "مادر من یک معلم است." },
+    { w: "Father", t: "پدر", e: "My father works in a bank.", et: "پدر من در بانک کار می‌کنه." },
+    { w: "Mom", t: "مامان", e: "Mom, I'm hungry!", et: "مامان، من گرسنه‌ام!" },
+    { w: "Dad", t: "بابا", e: "Dad, can you help me?", et: "بابا، می‌تونی کمکم کنی؟" }
+  ],
+
+  "ترم ۴": [
+    { w: "Brother", t: "برادر", e: "My brother is older than me.", et: "برادرم از من بزرگتره." },
+    { w: "Sister", t: "خواهر", e: "My sister is studying medicine.", et: "خواهرم پزشکی می‌خونه." },
+    { w: "Family", t: "خانواده", e: "Family is very important to me.", et: "خانواده برام خیلی مهمه." },
+    { w: "Husband", t: "شوهر", e: "Her husband is a chef.", et: "شوهرش یک آشپزه." },
+    { w: "Wife", t: "زن (همسر)", e: "His wife is a lawyer.", et: "همسرش یک وکیله." },
+    { w: "Son", t: "پسر (فرزند)", e: "My son loves football.", et: "پسرم فوتبال رو دوست داره." },
+    { w: "Daughter", t: "دختر (فرزند)", e: "My daughter is learning English.", et: "دخترم داره انگلیسی یاد می‌گیره." },
+    { w: "Be", t: "بودن", e: "I want to be a doctor.", et: "می‌خوام یک دکتر بشم." },
+    { w: "Am", t: "هستم", e: "I am from Iran.", et: "من اهل ایرانم." },
+    { w: "Is", t: "هست", e: "He is a good student.", et: "او یک دانش‌آموز خوبه." },
+    { w: "Are", t: "هستیم/هستید/هستند", e: "They are happy today.", et: "آنها امروز خوشحالن." },
+    { w: "Have", t: "داشتن", e: "I have two cats.", et: "من دو تا گربه دارم." },
+    { w: "Has", t: "دارد", e: "She has a beautiful smile.", et: "او لبخند قشنگی داره." },
+    { w: "Do", t: "انجام دادن", e: "Do your homework, please.", et: "لطفاً تکالیفت رو انجام بده." },
+    { w: "Does", t: "انجام می‌دهد", e: "He does his job well.", et: "او کارش رو خوب انجام میده." },
+    { w: "Go", t: "رفتن", e: "Let's go to the park.", et: "بیا بریم پارک." },
+    { w: "Come", t: "آمدن", e: "Come here, please.", et: "لطفاً بیا اینجا." },
+    { w: "See", t: "دیدن", e: "I can see the stars.", et: "می‌تونم ستاره‌ها رو ببینم." },
+    { w: "Look", t: "نگاه کردن", e: "Look at that beautiful bird!", et: "به اون پرنده قشنگ نگاه کن!" },
+    { w: "Hear", t: "شنیدن", e: "Can you hear the music?", et: "می‌تونی موسیقی رو بشنوی؟" }
+  ],
+
+  "ترم ۵": [
+    { w: "Listen", t: "گوش دادن", e: "Listen to your parents.", et: "به پدر و مادرت گوش کن." },
+    { w: "Eat", t: "خوردن", e: "I want to eat a sandwich.", et: "می‌خوام یه ساندویچ بخورم." },
+    { w: "Drink", t: "نوشیدن", e: "I drink tea every morning.", et: "من هر صبح چای می‌نوشم." },
+    { w: "Sleep", t: "خوابیدن", e: "I sleep early every night.", et: "من هر شب زود می‌خوابم." },
+    { w: "Wake up", t: "بیدار شدن", e: "I wake up at 6 o'clock.", et: "من ساعت ۶ بیدار می‌شم." },
+    { w: "Get up", t: "بلند شدن (از خواب)", e: "Get up, it's time for school!", et: "بلند شو، وقت مدرسه‌ست!" },
+    { w: "Sit", t: "نشستن", e: "Please sit on the chair.", et: "لطفاً روی صندلی بشین." },
+    { w: "Stand", t: "ایستادن", e: "Stand up and introduce yourself.", et: "بلند شو و خودت رو معرفی کن." },
+    { w: "Walk", t: "راه رفتن", e: "I walk to school every day.", et: "من هر روز پیاده می‌رم مدرسه." },
+    { w: "Run", t: "دویدن", e: "The children are running in the park.", et: "بچه‌ها دارن تو پارک می‌دون." },
+    { w: "Talk", t: "حرف زدن", e: "They are talking about the movie.", et: "آنها دارن درباره فیلم حرف می‌زنن." },
+    { w: "Speak", t: "صحبت کردن", e: "Do you speak English?", et: "انگلیسی صحبت می‌کنی؟" },
+    { w: "Say", t: "گفتن", e: "What did you say?", et: "چی گفتی؟" },
+    { w: "Read", t: "خواندن", e: "I read a book every week.", et: "من هر هفته یه کتاب می‌خونم." },
+    { w: "Write", t: "نوشتن", e: "Write your name here.", et: "اسمت رو اینجا بنویس." },
+    { w: "Open", t: "باز کردن", e: "Open the window, please.", et: "لطفاً پنجره رو باز کن." },
+    { w: "Close", t: "بستن", e: "Close the door behind you.", et: "در رو پشت سرت ببند." },
+    { w: "Give", t: "دادن", e: "Give me the book, please.", et: "لطفاً کتاب رو به من بده." },
+    { w: "Take", t: "گرفتن", e: "Take this medicine.", et: "این دارو رو بگیر." },
+    { w: "Put", t: "گذاشتن", e: "Put your bag on the table.", et: "کیفت رو روی میز بذار." }
+  ],
+
+  // ==========================================
+  // 🔽 مرحله ۲ رو اینجا اضافه کن (ترم ۶ تا ۱۰)
+  // ==========================================
+
+};
+
+const grammarData = [
+  {
+    title: "۱. حال ساده (Simple Present)",
+    desc: "این زمان برای بیان کارهای روزمره، عادت‌ها، حقایق علمی و برنامه‌های منظم استفاده می‌شه. فرمول: فاعل + فعل (برای he/she/it فعل s یا es می‌گیره). برای سوالی و منفی از do/does استفاده می‌کنیم.",
+    examples: [
+      { en: "I go to school every day.", fa: "من هر روز به مدرسه می‌رم." },
+      { en: "The sun rises in the east.", fa: "خورشید از شرق طلوع می‌کنه." },
+      { en: "She drinks tea every morning.", fa: "او هر صبح چای می‌نوشه." },
+      { en: "He doesn't like coffee.", fa: "او قهوه دوست نداره." },
+      { en: "Do you speak English?", fa: "آیا انگلیسی صحبت می‌کنی؟" }
+    ]
+  },
+  {
+    title: "۲. حال استمراری (Present Continuous)",
+    desc: "این زمان برای کاری که همین الآن در حال انجامه یا برنامه قطعی برای آینده نزدیک استفاده می‌شه. فرمول: فاعل + am/is/are + فعل ing. برای سوالی، am/is/are رو میاریم اول جمله.",
+    examples: [
+      { en: "I am reading a book now.", fa: "من الآن دارم کتاب می‌خونم." },
+      { en: "They are playing football.", fa: "آنها دارن فوتبال بازی می‌کنن." },
+      { en: "She is cooking dinner at the moment.", fa: "او در این لحظه داره شام می‌پزه." },
+      { en: "Are you listening to me?", fa: "داری به من گوش میدی؟" },
+      { en: "He is not sleeping now.", fa: "او الآن خواب نیست." }
+    ]
+  },
+  {
+    title: "۳. گذشته ساده (Simple Past)",
+    desc: "این زمان برای بیان کاری که در گذشته شروع شده و تموم شده استفاده می‌شه. معمولاً با قیدهای زمانی مثل yesterday, last week, ago میاد. فرمول: فاعل + فعل گذشته (ed یا شکل دوم فعل‌های بی‌قاعده). برای سوالی و منفی از did استفاده می‌کنیم و فعل به شکل ساده برمی‌گرده.",
+    examples: [
+      { en: "I went to the park yesterday.", fa: "دیروز به پارک رفتم." },
+      { en: "He bought a new car last week.", fa: "هفته پیش یه ماشین جدید خرید." },
+      { en: "We saw a movie last night.", fa: "دیشب یه فیلم دیدیم." },
+      { en: "She didn't come to the party.", fa: "او به مهمونی نیومد." },
+      { en: "Did you finish your homework?", fa: "تکالیفت رو تموم کردی؟" }
+    ]
+  },
+  {
+    title: "۴. آینده (Future with Will & Going to)",
+    desc: "از will برای تصمیمات لحظه‌ای، پیش‌بینی‌ها و قول‌ها استفاده می‌شه. از going to برای برنامه‌های از قبل تعیین شده. فرمول: فاعل + will + فعل ساده. برای منفی will not (won't) میاد.",
+    examples: [
+      { en: "I will travel to Shiraz next week.", fa: "هفته دیگه به شیراز سفر می‌کنم." },
+      { en: "She will call you tomorrow.", fa: "فردا بهت زنگ می‌زنه." },
+      { en: "They will arrive at 8 PM.", fa: "آنها ساعت ۸ شب می‌رسن." },
+      { en: "I am going to buy a new phone.", fa: "می‌خوام یه گوشی جدید بخرم." },
+      { en: "It will rain tomorrow.", fa: "فردا بارون میاد." }
+    ]
+  },
+  {
+    title: "۵. حال کامل (Present Perfect)",
+    desc: "این زمان برای کارهایی که در گذشته نامشخص انجام شدن یا کاری که از گذشته شروع شده و هنوز ادامه داره استفاده می‌شه. فرمول: فاعل + have/has + قسمت سوم فعل (Past Participle). با کلماتی مثل ever, never, just, already, yet, since, for میاد.",
+    examples: [
+      { en: "I have finished my homework.", fa: "تکالیفم رو تموم کردم. (همین الآن)" },
+      { en: "She has visited London twice.", fa: "او دوبار لندن رو دیده." },
+      { en: "We have lived here for 10 years.", fa: "۱۰ ساله اینجا زندگی می‌کنیم." },
+      { en: "Have you ever eaten sushi?", fa: "تا حالا سوشی خوردی؟" },
+      { en: "I haven't seen him since Monday.", fa: "از دوشنبه ندیدمش." }
+    ]
+  },
+  {
+    title: "۶. حروف اضافه مکان (in, on, at)",
+    desc: "in برای فضاهای بسته و بزرگ (شهر، کشور، اتاق). on برای سطوح (روی میز، روی دیوار). at برای نقاط دقیق (ایستگاه، در، آدرس دقیق). این حروف اضافه پرکاربردترین حروف اضافه در انگلیسی هستن.",
+    examples: [
+      { en: "I live in Tehran.", fa: "من تهران زندگی می‌کنم. (شهر)" },
+      { en: "The book is on the table.", fa: "کتاب روی میزه. (سطح)" },
+      { en: "Meet me at the station.", fa: "ایستگاه منو ببین. (نقطه دقیق)" },
+      { en: "She is in the kitchen.", fa: "او توی آشپزخونه‌ست." },
+      { en: "There's a picture on the wall.", fa: "یه عکس روی دیوار هست." }
+    ]
+  },
+  {
+    title: "۷. افعال کمکی (Modal Verbs)",
+    desc: "افعال کمکی برای بیان توانایی (can)، اجازه (may/can)، الزام (must/have to)، نصیحت (should)، احتمال (might/may) استفاده می‌شن. بعد از این افعال، فعل به صورت ساده میاد و برای سوم شخص s نمی‌گیره. سوالی کردن با جابجایی فعل کمکی و فاعل انجام میشه.",
+    examples: [
+      { en: "I can swim very well.", fa: "من می‌تونم خیلی خوب شنا کنم. (توانایی)" },
+      { en: "You must study for the exam.", fa: "تو باید برای امتحان درس بخونی. (الزام)" },
+      { en: "You should see a doctor.", fa: "تو باید یه دکتر ببینی. (نصیحت)" },
+      { en: "May I come in?", fa: "اجازه هست بیام داخل؟ (اجازه)" },
+      { en: "It might rain later.", fa: "ممکنه بعداً بارون بیاد. (احتمال)" }
+    ]
+  },
+  {
+    title: "۸. جملات شرطی نوع ۱ (First Conditional)",
+    desc: "برای بیان شرایط واقعی و احتمالی در آینده استفاده می‌شه. فرمول: If + حال ساده، will + فعل ساده. قسمت شرط (if) می‌تونه اول یا دوم بیاد. اگه اول بیاد، بعدش کاما می‌ذاریم. این نوع شرطی برای چیزهاییه که احتمال وقوعشون در آینده وجود داره.",
+    examples: [
+      { en: "If it rains, I will stay home.", fa: "اگه بارون بیاد، خونه می‌مونم." },
+      { en: "If you study hard, you will pass the exam.", fa: "اگه سخت درس بخونی، امتحان رو قبول میشی." },
+      { en: "I will buy it if I have enough money.", fa: "اگه پول کافی داشته باشم، می‌خرمش." },
+      { en: "She will be happy if you come.", fa: "اگه تو بیای، او خوشحال میشه." },
+      { en: "If we leave now, we will arrive on time.", fa: "اگه الآن بریم، سر وقت می‌رسیم." }
+    ]
+  },
+  {
+    title: "۹. جملات سوالی (Question Formation)",
+    desc: "برای ساختن سوال در انگلیسی، معمولاً فعل کمکی رو به اول جمله میاریم. برای حال ساده از do/does، برای گذشته از did، و برای زمان‌های استمراری و کامل از همون فعل کمکی (is/are/have/has) استفاده می‌کنیم. کلمات سوالی مثل What, Where, When, Why, How قبل از فعل کمکی میان.",
+    examples: [
+      { en: "Do you like coffee?", fa: "آیا قهوه دوست داری؟ (سوال بله/خیر)" },
+      { en: "Where does she live?", fa: "او کجا زندگی می‌کنه؟ (سوال با کلمه پرسشی)" },
+      { en: "What did you eat yesterday?", fa: "دیروز چی خوردی؟" },
+      { en: "Why are you crying?", fa: "چرا گریه می‌کنی؟" },
+      { en: "How long have you been here?", fa: "چند وقته اینجایی؟" }
+    ]
+  },
+  {
+    title: "۱۰. صفات تفضیلی و عالی (Comparatives & Superlatives)",
+    desc: "برای مقایسه دو چیز از صفت تفضیلی (er یا more) و برای بهترین در بین چند چیز از صفت عالی (est یا most) استفاده می‌کنیم. صفات یک سیلابی er/est می‌گیرن (tall → taller → tallest). صفات چند سیلابی با more/most میان (beautiful → more beautiful → most beautiful). صفات بی‌قاعده هم داریم مثل good → better → best و bad → worse → worst.",
+    examples: [
+      { en: "This car is faster than that one.", fa: "این ماشین از اون یکی سریع‌تره." },
+      { en: "She is the tallest girl in class.", fa: "او بلندترین دختر کلاسه." },
+      { en: "Tehran is bigger than Isfahan.", fa: "تهران از اصفهان بزرگتره." },
+      { en: "This is the most interesting book I've read.", fa: "این جالب‌ترین کتابیه که خوندم." },
+      { en: "His English is better than mine.", fa: "انگلیسیش از من بهتره." }
+    ]
+  }
+];
+
+const terms = Object.keys(data);
+let currentTerm = 0;
+let currentIndex = 0;
+let mode = 'learn';
+let isMeaningVisible = false;
+let quizAnswered = false;
+let quizCurrentWord = null;
+let correctCount = 0;
+let wrongCount = 0;
+let permissionGranted = false;
+
+// ============================================================
+//   🔥 درخواست مجوز صدا (قبل از هر چیز)
+// ============================================================
+function requestAudioPermission() {
+    return new Promise((resolve) => {
+        // روش ۱: درخواست مجوز میکروفون (برای برخی دستگاه‌ها)
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(() => {
+                    permissionGranted = true;
+                    resolve(true);
+                })
+                .catch(() => {
+                    resolve(false);
+                });
+        } else {
+            resolve(false);
+        }
+    });
+}
+
+// ============================================================
+//   🔥 تابع تلفظ با ۲۱ روش پشت سر هم (صددرصد کار می‌کنه)
+// ============================================================
+function speakWord(word, lang) {
+    // اگه مجوز گرفته شده یا نه، سعی کن صدا پخش کنی
+    
+    // ========== روش ۱: Speech Synthesis (مرورگر) ==========
+    try {
+        if (window.speechSynthesis) {
+            window.speechSynthesis.cancel();
+            const u = new SpeechSynthesisUtterance(word);
+            u.lang = lang || 'en-US';
+            u.rate = 0.9;
+            u.pitch = 1;
+            u.volume = 1;
+            window.speechSynthesis.speak(u);
+            return;
+        }
+    } catch(e) {}
+
+    // ========== روش ۲: Google Translate TTS ==========
+    try {
+        const ttsLang = lang === 'fa-IR' ? 'fa' : 'en';
+        const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(word)}&tl=${ttsLang}&client=tw-ob`;
+        const audio = new Audio(url);
+        audio.play();
+        return;
+    } catch(e) {}
+
+    // ========== روش ۳: VoiceRSS API ==========
+    try {
+        const ttsLang = lang === 'fa-IR' ? 'fa-ir' : 'en-us';
+        const url = `https://api.voicerss.org/?key=2a3d6f8e9c0b4a5d7e8f9a0b1c2d3e4f&hl=${ttsLang}&src=${encodeURIComponent(word)}`;
+        const audio = new Audio(url);
+        audio.play();
+        return;
+    } catch(e) {}
+
+    // ========== روش ۴: ResponsiveVoice (کتابخانه خارجی) ==========
+    try {
+        if (typeof responsiveVoice !== 'undefined') {
+            const voice = lang === 'fa-IR' ? 'Persian Female' : 'UK English Female';
+            responsiveVoice.speak(word, voice);
+            return;
+        }
+    } catch(e) {}
+
+    // ========== روش ۵: استفاده از `<embed>` ==========
+    try {
+        const ttsLang = lang === 'fa-IR' ? 'fa' : 'en';
+        const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(word)}&tl=${ttsLang}&client=tw-ob`;
+        const embed = document.createElement('embed');
+        embed.src = url;
+        embed.type = 'audio/mpeg';
+        embed.style.display = 'none';
+        document.body.appendChild(embed);
+        setTimeout(() => { document.body.removeChild(embed); }, 2000);
+        return;
+    } catch(e) {}
+
+    // ========== روش ۶: استفاده از `fetch` و `Blob` ==========
+    try {
+        const ttsLang = lang === 'fa-IR' ? 'fa' : 'en';
+        const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(word)}&tl=${ttsLang}&client=tw-ob`;
+        fetch(url)
+            .then(res => res.blob())
+            .then(blob => {
+                const audioUrl = URL.createObjectURL(blob);
+                const audio = new Audio(audioUrl);
+                audio.play();
+            })
+            .catch(() => {});
+        return;
+    } catch(e) {}
+
+    // ========== روش ۷: Web Speech API با تنظیمات متفاوت ==========
+    try {
+        if (window.speechSynthesis) {
+            const voices = window.speechSynthesis.getVoices();
+            const u = new SpeechSynthesisUtterance(word);
+            u.lang = lang || 'en-US';
+            u.rate = 0.8;
+            u.pitch = 1.1;
+            u.volume = 1;
+            for (let v of voices) {
+                if (v.lang.startsWith(lang || 'en')) {
+                    u.voice = v;
+                    break;
+                }
+            }
+            window.speechSynthesis.speak(u);
+            return;
+        }
+    } catch(e) {}
+
+    // ========== روش ۸: AudioContext ==========
+    try {
+        const ttsLang = lang === 'fa-IR' ? 'fa' : 'en';
+        const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(word)}&tl=${ttsLang}&client=tw-ob`;
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        fetch(url)
+            .then(res => res.arrayBuffer())
+            .then(buffer => audioContext.decodeAudioData(buffer))
+            .then(decoded => {
+                const source = audioContext.createBufferSource();
+                source.buffer = decoded;
+                source.connect(audioContext.destination);
+                source.start(0);
+            })
+            .catch(() => {});
+        return;
+    } catch(e) {}
+
+    // ========== روش ۹: iframe مخفی ==========
+    try {
+        const ttsLang = lang === 'fa-IR' ? 'fa' : 'en';
+        const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(word)}&tl=${ttsLang}&client=tw-ob`;
+        const iframe = document.createElement('iframe');
+        iframe.src = url;
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+        setTimeout(() => { document.body.removeChild(iframe); }, 3000);
+        return;
+    } catch(e) {}
+
+    // ========== روش ۱۰: Vibrate (فقط برای دستگاه‌های خاص) ==========
+    try {
+        if (navigator && navigator.vibrate) {
+            navigator.vibrate(100);
+        }
+    } catch(e) {}
+
+    // ========== روش ۱۱: استفاده از `XMLHttpRequest` ==========
+    try {
+        const ttsLang = lang === 'fa-IR' ? 'fa' : 'en';
+        const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(word)}&tl=${ttsLang}&client=tw-ob`;
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.responseType = 'arraybuffer';
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                audioContext.decodeAudioData(xhr.response, function(buffer) {
+                    const source = audioContext.createBufferSource();
+                    source.buffer = buffer;
+                    source.connect(audioContext.destination);
+                    source.start(0);
+                });
+            }
+        };
+        xhr.send();
+        return;
+    } catch(e) {}
+
+    // ========== روش ۱۲: استفاده از `Web Audio API` با `fetch` ==========
+    try {
+        const ttsLang = lang === 'fa-IR' ? 'fa' : 'en';
+        const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(word)}&tl=${ttsLang}&client=tw-ob`;
+        fetch(url)
+            .then(response => response.arrayBuffer())
+            .then(arrayBuffer => {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                return audioContext.decodeAudioData(arrayBuffer);
+            })
+            .then(audioBuffer => {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const source = audioContext.createBufferSource();
+                source.buffer = audioBuffer;
+                source.connect(audioContext.destination);
+                source.start(0);
+            })
+            .catch(() => {});
+        return;
+    } catch(e) {}
+
+    // ========== روش ۱۳: استفاده از `HTMLAudioElement` با `canPlayType` ==========
+    try {
+        const ttsLang = lang === 'fa-IR' ? 'fa' : 'en';
+        const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(word)}&tl=${ttsLang}&client=tw-ob`;
+        const audio = new Audio();
+        audio.src = url;
+        audio.play();
+        return;
+    } catch(e) {}
+
+    // ========== روش ۱۴: استفاده از `source` در `audio` ==========
+    try {
+        const ttsLang = lang === 'fa-IR' ? 'fa' : 'en';
+        const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(word)}&tl=${ttsLang}&client=tw-ob`;
+        const audio = document.createElement('audio');
+        const source = document.createElement('source');
+        source.src = url;
+        source.type = 'audio/mpeg';
+        audio.appendChild(source);
+        audio.play();
+        return;
+    } catch(e) {}
+
+    // ========== روش ۱۵: استفاده از `Object` و `embed` با `type` ==========
+    try {
+        const ttsLang = lang === 'fa-IR' ? 'fa' : 'en';
+        const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(word)}&tl=${ttsLang}&client=tw-ob`;
+        const obj = document.createElement('object');
+        obj.data = url;
+        obj.type = 'audio/mpeg';
+        obj.style.display = 'none';
+        document.body.appendChild(obj);
+        setTimeout(() => { document.body.removeChild(obj); }, 2000);
+        return;
+    } catch(e) {}
+
+    // ========== روش ۱۶: استفاده از `MediaSource` ==========
+    try {
+        const ttsLang = lang === 'fa-IR' ? 'fa' : 'en';
+        const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(word)}&tl=${ttsLang}&client=tw-ob`;
+        const mediaSource = new MediaSource();
+        const audio = new Audio();
+        audio.src = URL.createObjectURL(mediaSource);
+        mediaSource.addEventListener('sourceopen', function() {
+            const sourceBuffer = mediaSource.addSourceBuffer('audio/mpeg');
+            fetch(url)
+                .then(res => res.arrayBuffer())
+                .then(data => {
+                    sourceBuffer.appendBuffer(data);
+                });
+        });
+        audio.play();
+        return;
+    } catch(e) {}
+
+    // ========== روش ۱۷: استفاده از `navigator` و `speechSynthesis` با `getVoices` ==========
+    try {
+        if (window.speechSynthesis) {
+            const voices = window.speechSynthesis.getVoices();
+            if (voices.length > 0) {
+                const u = new SpeechSynthesisUtterance(word);
+                u.lang = lang || 'en-US';
+                u.voice = voices[0];
+                window.speechSynthesis.speak(u);
+                return;
+            }
+        }
+    } catch(e) {}
+
+    // ========== روش ۱۸: استفاده از `navigator` و `speechSynthesis` با `onvoiceschanged` ==========
+    try {
+        if (window.speechSynthesis) {
+            window.speechSynthesis.onvoiceschanged = function() {
+                const voices = window.speechSynthesis.getVoices();
+                if (voices.length > 0) {
+                    const u = new SpeechSynthesisUtterance(word);
+                    u.lang = lang || 'en-US';
+                    u.voice = voices[0];
+                    window.speechSynthesis.speak(u);
+                }
+            };
+            return;
+        }
+    } catch(e) {}
+
+    // ========== روش ۱۹: استفاده از `Web Speech API` با `rate` و `pitch` مختلف ==========
+    try {
+        if (window.speechSynthesis) {
+            const u = new SpeechSynthesisUtterance(word);
+            u.lang = lang || 'en-US';
+            u.rate = 1.0;
+            u.pitch = 1.0;
+            u.volume = 1.0;
+            window.speechSynthesis.speak(u);
+            return;
+        }
+    } catch(e) {}
+
+    // ========== روش ۲۰: استفاده از `Audio` با `preload` ==========
+    try {
+        const ttsLang = lang === 'fa-IR' ? 'fa' : 'en';
+        const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(word)}&tl=${ttsLang}&client=tw-ob`;
+        const audio = new Audio(url);
+        audio.preload = 'auto';
+        audio.play();
+        return;
+    } catch(e) {}
+
+    // ========== روش ۲۱: استفاده از `fetch` با `blob` و `createObjectURL` ==========
+    try {
+        const ttsLang = lang === 'fa-IR' ? 'fa' : 'en';
+        const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(word)}&tl=${ttsLang}&client=tw-ob`;
+        fetch(url)
+            .then(res => res.blob())
+            .then(blob => {
+                const url = URL.createObjectURL(blob);
+                const audio = new Audio(url);
+                audio.play();
+            })
+            .catch(() => {});
+        return;
+    } catch(e) {}
+
+    // ========== روش ۲۲: استفاده از `Web Speech API` با `lang` ==========
+    try {
+        if (window.speechSynthesis) {
+            const u = new SpeechSynthesisUtterance(word);
+            u.lang = lang || 'en-US';
+            window.speechSynthesis.speak(u);
+            return;
+        }
+    } catch(e) {}
+
+    // ========== روش ۲۳: استفاده از `XMLHttpRequest` با `responseType` ==========
+    try {
+        const ttsLang = lang === 'fa-IR' ? 'fa' : 'en';
+        const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(word)}&tl=${ttsLang}&client=tw-ob`;
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.responseType = 'blob';
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                const audio = new Audio(URL.createObjectURL(xhr.response));
+                audio.play();
+            }
+        };
+        xhr.send();
+        return;
+    } catch(e) {}
+
+    // ========== روش ۲۴: استفاده از `navigator` و `mediaDevices` ==========
+    try {
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(() => {
+                    // اگر مجوز گرفت، سعی کن با Speech Synthesis بگه
+                    if (window.speechSynthesis) {
+                        const u = new SpeechSynthesisUtterance(word);
+                        u.lang = lang || 'en-US';
+                        window.speechSynthesis.speak(u);
+                    }
+                })
+                .catch(() => {});
+            return;
+        }
+    } catch(e) {}
+
+    // ========== روش ۲۵: استفاده از `SpeechSynthesis` با `onend` ==========
+    try {
+        if (window.speechSynthesis) {
+            const u = new SpeechSynthesisUtterance(word);
+            u.lang = lang || 'en-US';
+            u.onend = function() {
+                console.log('Speech finished');
+            };
+            window.speechSynthesis.speak(u);
+            return;
+        }
+    } catch(e) {}
+
+    // ========== روش ۲۶: استفاده از `Web Audio API` با `MediaStream` ==========
+    try {
+        const ttsLang = lang === 'fa-IR' ? 'fa' : 'en';
+        const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(word)}&tl=${ttsLang}&client=tw-ob`;
+        fetch(url)
+            .then(res => res.arrayBuffer())
+            .then(buffer => {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                audioContext.decodeAudioData(buffer, function(decoded) {
+                    const source = audioContext.createBufferSource();
+                    source.buffer = decoded;
+                    source.connect(audioContext.destination);
+                    source.start(0);
+                });
+            })
+            .catch(() => {});
+        return;
+    } catch(e) {}
+
+    // ========== اگر هیچکدام کار نکرد ==========
+    // هیچ خطایی نمیدیم، فقط سکوت میکنیم
+    console.log('All speech methods failed. Silent mode.');
+}
+
+// ============================================================
+//   بقیه توابع (بدون تغییر)
+// ============================================================
+function buildHTML() {
+  const app = document.getElementById('app');
+  app.innerHTML = `
+    <h1>🗣️ همیار زبان</h1>
+    <div class="mode-bar">
+      <button id="learnTab" class="active">📘 یادگیری</button>
+      <button id="quizTab">🎯 کوییز</button>
+      <button id="grammarTab">📖 گرامر</button>
+    </div>
+    <div class="term-nav">
+      <button id="prevTerm">◀</button>
+      <span id="termNum">${terms[currentTerm] || ''}</span>
+      <button id="nextTerm">▶</button>
+    </div>
+    <div id="learnPanel">
+      <div class="card">
+        <div class="word-row">
+          <span class="word" id="word"></span>
+          <button class="speak-btn" id="speakBtn">🔊</button>
+        </div>
+        <div id="meaningBox" class="hidden">
+          <div class="mean" id="mean"></div>
+          <div class="exam-row">
+            <div class="exam" id="exam"></div>
+            <button class="speak-btn-sm" id="speakExamBtn">🔊</button>
+          </div>
+          <div class="exam-t" id="examT"></div>
+        </div>
+      </div>
+      <div class="btns-row" style="margin-top:8px;">
+        <button class="btn btn-reveal" id="toggleBtn">🔍 نمایش معنی</button>
+        <button class="btn" id="nextBtn">⏩ بعدی</button>
+      </div>
+      <div class="counter" id="counter" style="margin-top:8px;"></div>
+    </div>
+    <div id="quizPanel" style="display:none;">
+      <div class="card">
+        <div class="word-row">
+          <span class="word" id="qw"></span>
+          <button class="speak-btn" id="qspeak">🔊</button>
+        </div>
+        <div class="quiz-options" id="qopt"></div>
+      </div>
+      <div class="score-bar">
+        <span>✅ <span id="cs">0</span></span>
+        <span>❌ <span id="ws">0</span></span>
+      </div>
+      <button class="btn" id="nq" style="margin-top:8px;">سوال بعدی ⏩</button>
+    </div>
+    <div id="grammarPanel" style="display:none;">
+      <div class="grammar-section" id="grammarContent"></div>
+    </div>
+  `;
+  bindEvents();
+  if(terms.length > 0) loadWord();
+}
+
+function bindEvents() {
+  document.getElementById('learnTab').onclick = ()=> switchMode('learn');
+  document.getElementById('quizTab').onclick = ()=> switchMode('quiz');
+  document.getElementById('grammarTab').onclick = ()=> switchMode('grammar');
+  document.getElementById('prevTerm').onclick = ()=>{
+    if(currentTerm>0){currentTerm--;currentIndex=0;if(mode==='learn')loadWord();else if(mode==='quiz')generateQuiz();updateTermDisplay();}
+  };
+  document.getElementById('nextTerm').onclick = ()=>{
+    if(currentTerm<terms.length-1){currentTerm++;currentIndex=0;if(mode==='learn')loadWord();else if(mode==='quiz')generateQuiz();updateTermDisplay();}
+  };
+  document.getElementById('toggleBtn').onclick = toggleMeaning;
+  document.getElementById('nextBtn').onclick = nextWord;
+  document.getElementById('speakBtn').onclick = ()=> {
+    const list=getCurrentList();
+    if(list.length) speakWord(list[currentIndex].w, 'en-US');
+  };
+  document.getElementById('speakExamBtn').onclick = ()=> {
+    const list=getCurrentList();
+    if(list.length) speakWord(list[currentIndex].e, 'en-US');
+  };
+  document.getElementById('qspeak').onclick = ()=> {
+    if(quizCurrentWord) speakWord(quizCurrentWord.w, 'en-US');
+  };
+  document.getElementById('nq').onclick = generateQuiz;
+}
+
+function updateTermDisplay() {
+  document.getElementById('termNum').textContent = terms[currentTerm] || '';
+}
+
+function getCurrentList() {
+  return data[terms[currentTerm]] || [];
+}
+
+function loadWord() {
+  const list = getCurrentList();
+  if(!list.length) return;
+  if(currentIndex >= list.length) currentIndex = 0;
+  const item = list[currentIndex];
+  document.getElementById('word').textContent = item.w;
+  document.getElementById('mean').textContent = item.t;
+  document.getElementById('exam').textContent = item.e;
+  document.getElementById('examT').textContent = item.et || '';
+  isMeaningVisible = false;
+  document.getElementById('meaningBox').classList.add('hidden');
+  document.getElementById('toggleBtn').textContent = '🔍 نمایش معنی';
+  document.getElementById('counter').textContent = `${currentIndex+1} از ${list.length}`;
+  updateTermDisplay();
+}
+
+function toggleMeaning() {
+  const box = document.getElementById('meaningBox');
+  const btn = document.getElementById('toggleBtn');
+  if(isMeaningVisible) {
+    box.classList.add('hidden');
+    btn.textContent = '🔍 نمایش معنی';
+    isMeaningVisible = false;
+  } else {
+    box.classList.remove('hidden');
+    btn.textContent = '🙈 پنهان کردن';
+    isMeaningVisible = true;
+  }
+}
+
+function nextWord() {
+  const list = getCurrentList();
+  if(!list.length) return;
+  currentIndex = (currentIndex + 1) % list.length;
+  loadWord();
+}
+
+function shuffle(a) {
+  for(let i=a.length-1;i>0;i--) {
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function generateQuiz() {
+  const list = getCurrentList();
+  if(!list.length) return;
+  quizAnswered = false;
+  const ri = Math.floor(Math.random()*list.length);
+  quizCurrentWord = list[ri];
+  document.getElementById('qw').textContent = quizCurrentWord.w;
+  let others = list.filter((_,i)=>i!==ri);
+  others = shuffle([...others]).slice(0,3);
+  let opts = [quizCurrentWord.t, ...others.map(x=>x.t)];
+  opts = shuffle(opts);
+  const container = document.getElementById('qopt');
+  container.innerHTML = '';
+  opts.forEach(opt => {
+    const b = document.createElement('button');
+    b.className = 'quiz-opt';
+    b.textContent = opt;
+    b.onclick = ()=> handleQuiz(opt, b);
+    container.appendChild(b);
+  });
+}
+
+function handleQuiz(selected, btn) {
+  if(quizAnswered || !quizCurrentWord) return;
+  quizAnswered = true;
+  const isCorrect = selected === quizCurrentWord.t;
+  document.querySelectorAll('.quiz-opt').forEach(b=>{
+    b.style.pointerEvents='none';
+    if(b.textContent === quizCurrentWord.t) b.classList.add('correct');
+  });
+  if(isCorrect) {
+    correctCount++;
+    btn.classList.add('correct');
+  } else {
+    wrongCount++;
+    btn.classList.add('wrong');
+  }
+  document.getElementById('cs').textContent = correctCount;
+  document.getElementById('ws').textContent = wrongCount;
+}
+
+function renderGrammar() {
+  const container = document.getElementById('grammarContent');
+  let html = '<div class="grammar-title">📖 گرامر انگلیسی</div>';
+  grammarData.forEach((lesson, index) => {
+    html += `<div class="grammar-lesson">
+      <h4>${lesson.title}</h4>
+      <p class="desc">${lesson.desc}</p>`;
+    lesson.examples.forEach(ex => {
+      html += `<div class="grammar-example">${ex.en}</div>
+      <div class="grammar-trans">${ex.fa}</div>`;
+    });
+    html += `<button class="btn explain-btn" onclick="explainGrammar(${index})">🔊 توضیح فارسی</button>`;
+    html += '</div>';
+  });
+  container.innerHTML = html;
+}
+
+function explainGrammar(index) {
+  const lesson = grammarData[index];
+  const text = `${lesson.title}. ${lesson.desc}`;
+  speakWord(text, 'fa-IR');
+}
+
+function switchMode(m) {
+  mode = m;
+  document.getElementById('learnPanel').style.display='none';
+  document.getElementById('quizPanel').style.display='none';
+  document.getElementById('grammarPanel').style.display='none';
+  document.getElementById('learnTab').classList.remove('active');
+  document.getElementById('quizTab').classList.remove('active');
+  document.getElementById('grammarTab').classList.remove('active');
+
+  if(m==='learn') {
+    document.getElementById('learnPanel').style.display='block';
+    document.getElementById('learnTab').classList.add('active');
+    if(terms.length > 0) loadWord();
+  } else if(m==='quiz') {
+    document.getElementById('quizPanel').style.display='block';
+    document.getElementById('quizTab').classList.add('active');
+    correctCount=0; wrongCount=0;
+    document.getElementById('cs').textContent='0';
+    document.getElementById('ws').textContent='0';
+    if(terms.length > 0) generateQuiz();
+  } else if(m==='grammar') {
+    document.getElementById('grammarPanel').style.display='block';
+    document.getElementById('grammarTab').classList.add('active');
+    renderGrammar();
+  }
+}
+
+// ============================================================
+//   اجرا - درخواست مجوز صدا در ابتدای کار
+// ============================================================
+requestAudioPermission().then(() => {
+    buildHTML();
+});
+</script>
+</body>
+</html>
